@@ -1,5 +1,8 @@
 #!/bin/sh
 
+#
+# This script will generate all of the vestorly apis
+#
 
 java -DdebugSwagger -cp ./target/*:./target/lib/* com.wordnik.swagger.codegen.Codegen -i http://developers.vestorly.com/api-docs -l python -o vestorly/python
 java -DdebugSwagger -cp ./target/*:./target/lib/* com.wordnik.swagger.codegen.Codegen -i http://developers.vestorly.com/api-docs -l objc -o vestorly/objectivec
