@@ -32,15 +32,18 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
 
     defaultIncludes = new HashSet<String>(
       Arrays.asList(
-        "bool",
-        "int",
-        "NSString",
-        "NSObject", 
-        "NSArray",
-        "NSNumber",
-        "NSDictionary",
-        "NSMutableArray",
-        "NSMutableDictionary")
+	      "char",
+	      "double",
+	      "int",
+	      "long",
+	      "float",
+	      "String",
+	      "boolean",
+	      "Boolean",
+	      "Double",
+	      "Integer",
+	      "Long",
+	      "Float")
       );
     languageSpecificPrimitives = new HashSet<String>(
       Arrays.asList(
@@ -52,29 +55,27 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
 
     reservedWords = new HashSet<String>(
       Arrays.asList(
-        "void", "char", "short", "int", "void", "char", "short", "int",
-        "long", "float", "double", "signed", "unsigned", "id", "const",
-        "volatile", "in", "out", "inout", "bycopy", "byref", "oneway",
-        "self", "super"
-      ));
+		  "abstract", "continue", "for", "new", "switch", "assert",
+	        "default", "if", "package", "synchronized", "do", "goto", "private", "this", "break",
+	        "implements", "protected", "throw", "else", "import", "public", "throws", "case",
+	        "enum", "instanceof", "return", "transient", "catch", "extends", "try", "final",
+	        "interface", "static", "void", "class", "finally", "strictfp", "volatile", "const",
+	        "native", "super", "while"));
 
     typeMapping = new HashMap<String, String>();
-    typeMapping.put("enum", "NSString");
-    typeMapping.put("Date", "SWGDate");
-    typeMapping.put("DateTime", "SWGDate");
-    // typeMapping.put("Date", "SWGDate");
-    typeMapping.put("boolean", "NSNumber");
-    typeMapping.put("string", "NSString");
-    typeMapping.put("integer", "NSNumber");
-    typeMapping.put("int", "NSNumber");
-    typeMapping.put("float", "NSNumber");
-    typeMapping.put("long", "NSNumber");
-    typeMapping.put("double", "NSNumber");
-    typeMapping.put("array", "NSArray");
-    typeMapping.put("map", "NSDictionary");
-    typeMapping.put("number", "NSNumber");
-    typeMapping.put("List", "NSArray");
-    typeMapping.put("object", "NSObject");
+    typeMapping.put("array", "List");
+    typeMapping.put("boolean", "bool?");
+    typeMapping.put("string", "string");
+    typeMapping.put("int", "int?");
+    typeMapping.put("float", "float?");
+    typeMapping.put("long", "long?");
+    typeMapping.put("double", "double?");
+    typeMapping.put("object", "object");
+    typeMapping.put("Date", "DateTime?");
+    typeMapping.put("date", "DateTime?");
+    typeMapping.put("File", "byte[]");
+    typeMapping.put("file", "byte[]");
+	
 
     importMapping = new HashMap<String, String> ();
     importMapping.put("Date", "SWGDate");
