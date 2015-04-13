@@ -20,8 +20,8 @@ using namespace Tizen::Web::Json;
 using Tizen::Base::Long;
 using Tizen::Base::DateTime;
 using Tizen::Base::String;
-using Tizen::Base::Integer;
 using Tizen::Base::Boolean;
+using Tizen::Base::Integer;
 
 
 namespace Swagger {
@@ -45,23 +45,23 @@ public:
     SamiOrder* fromJson(String* obj);
 
     
-    Long* getId();
-    void setId(Long* pId);
+    Long* getPId();
+    void setPId(Long* pId);
     
-    Long* getPetId();
-    void setPetId(Long* pPetId);
+    Long* getPPetId();
+    void setPPetId(Long* pPetId);
     
-    Integer* getQuantity();
-    void setQuantity(Integer* pQuantity);
+    Integer* getPQuantity();
+    void setPQuantity(Integer* pQuantity);
     
-    DateTime* getShipDate();
-    void setShipDate(DateTime* pShipDate);
+    DateTime* getPShipDate();
+    void setPShipDate(DateTime* pShipDate);
     
-    String* getStatus();
-    void setStatus(String* pStatus);
+    String* getPStatus();
+    void setPStatus(String* pStatus);
     
-    Boolean* getComplete();
-    void setComplete(Boolean* pComplete);
+    Boolean* getPComplete();
+    void setPComplete(Boolean* pComplete);
     
 
 private:

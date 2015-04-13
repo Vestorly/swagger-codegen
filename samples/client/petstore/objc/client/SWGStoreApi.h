@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "SWGOrder.h"
+#import "SWGObject.h"
 
 
 @interface SWGStoreApi: NSObject
@@ -11,14 +12,33 @@
 +(NSString*) getBasePath;
 /**
 
+ Returns pet inventories by status
+ Returns a map of status codes to quantities
+
+ 
+
+ return type: NSDictionary*
+ */
+-(NSNumber*) getInventoryWithCompletionBlock :
+    (void (^)(NSDictionary* output, NSError* error))completionBlock;
+    
+
+
+/**
+
  Place an order for a pet
  
 
  @param body order placed for purchasing the pet
  
+
+ return type: SWGOrder*
  */
--(NSNumber*) placeOrderWithCompletionBlock : (SWGOrder*) body
+-(NSNumber*) placeOrderWithCompletionBlock :(SWGOrder*) body 
+    
     completionHandler: (void (^)(SWGOrder* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -27,9 +47,14 @@
 
  @param orderId ID of pet that needs to be fetched
  
+
+ return type: SWGOrder*
  */
--(NSNumber*) getOrderByIdWithCompletionBlock : (NSString*) orderId
+-(NSNumber*) getOrderByIdWithCompletionBlock :(NSString*) orderId 
+    
     completionHandler: (void (^)(SWGOrder* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -38,8 +63,14 @@
 
  @param orderId ID of the order that needs to be deleted
  
- */
--(NSNumber*) deleteOrderWithCompletionBlock : (NSString*) orderId
 
+ return type: 
+ */
+-(NSNumber*) deleteOrderWithCompletionBlock :(NSString*) orderId 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
+
 @end

@@ -1,5 +1,7 @@
 #import <Foundation/Foundation.h>
 #import "SWGPet.h"
+#import "SWGFile.h"
+#import "SWGObject.h"
 
 
 @interface SWGPetApi: NSObject
@@ -16,21 +18,31 @@
 
  @param body Pet object that needs to be added to the store
  
- */
--(NSNumber*) updatePetWithCompletionBlock : (SWGPet*) body
 
+ return type: 
+ */
+-(NSNumber*) updatePetWithCompletionBlock :(SWGPet*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Add a new pet to the store
  
 
- @param pet Pet object that needs to be added to the store
+ @param body Pet object that needs to be added to the store
  
- */
--(NSNumber*) addPetWithCompletionBlock : (SWGPet*) pet
 
+ return type: 
+ */
+-(NSNumber*) addPetWithCompletionBlock :(SWGPet*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Finds Pets by status
@@ -38,9 +50,14 @@
 
  @param status Status values that need to be considered for filter
  
+
+ return type: NSArray<SWGPet>*
  */
--(NSNumber*) findPetsByStatusWithCompletionBlock : (NSArray*) status
-    completionHandler: (void (^)(NSArray* output, NSError* error))completionBlock;
+-(NSNumber*) findPetsByStatusWithCompletionBlock :(NSArray*) status 
+    
+    completionHandler: (void (^)(NSArray<SWGPet>* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -49,9 +66,14 @@
 
  @param tags Tags to filter by
  
+
+ return type: NSArray<SWGPet>*
  */
--(NSNumber*) findPetsByTagsWithCompletionBlock : (NSArray*) tags
-    completionHandler: (void (^)(NSArray* output, NSError* error))completionBlock;
+-(NSNumber*) findPetsByTagsWithCompletionBlock :(NSArray*) tags 
+    
+    completionHandler: (void (^)(NSArray<SWGPet>* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -60,9 +82,14 @@
 
  @param petId ID of pet that needs to be fetched
  
+
+ return type: SWGPet*
  */
--(NSNumber*) getPetByIdWithCompletionBlock : (NSNumber*) petId
+-(NSNumber*) getPetByIdWithCompletionBlock :(NSNumber*) petId 
+    
     completionHandler: (void (^)(SWGPet* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -73,12 +100,17 @@
  @param name Updated name of the pet
  @param status Updated status of the pet
  
- */
--(NSNumber*) updatePetWithFormWithCompletionBlock : (NSString*) petId
-            name: (NSString*) name
-            status: (NSString*) status
 
+ return type: 
+ */
+-(NSNumber*) updatePetWithFormWithCompletionBlock :(NSString*) petId 
+     name:(NSString*) name 
+     status:(NSString*) status 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Deletes a pet
@@ -87,9 +119,35 @@
  @param api_key 
  @param petId Pet id to delete
  
- */
--(NSNumber*) deletePetWithCompletionBlock : (NSString*) api_key
-            petId: (NSNumber*) petId
 
+ return type: 
+ */
+-(NSNumber*) deletePetWithCompletionBlock :(NSString*) api_key 
+     petId:(NSNumber*) petId 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
+/**
+
+ uploads an image
+ 
+
+ @param petId ID of pet to update
+ @param additionalMetadata Additional data to pass to server
+ @param file file to upload
+ 
+
+ return type: 
+ */
+-(NSNumber*) uploadFileWithCompletionBlock :(NSNumber*) petId 
+     additionalMetadata:(NSString*) additionalMetadata 
+     file:(SWGFile*) file 
+    
+    
+    completionHandler: (void (^)(NSError* error))completionBlock;
+
+
+
 @end

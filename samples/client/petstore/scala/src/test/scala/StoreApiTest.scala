@@ -1,18 +1,17 @@
-import com.wordnik.client._
-import com.wordnik.petstore.api._
-import com.wordnik.petstore.model._
+import io.swagger.client._
+import io.swagger.client.api._
+import io.swagger.client.model._
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.FlatSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest._
 
 import scala.collection.mutable.{ ListBuffer, HashMap }
 import scala.collection.JavaConversions._
 import scala.beans.BeanProperty
 
 @RunWith(classOf[JUnitRunner])
-class StoreApiTest extends FlatSpec with ShouldMatchers {
+class StoreApiTest extends FlatSpec with Matchers {
   behavior of "StoreApi"
   val api = new StoreApi
 
@@ -31,13 +30,14 @@ class StoreApiTest extends FlatSpec with ShouldMatchers {
   }
 
   it should "place an order" in {
-    val now = new java.util.Date
+    val now = new org.joda.time.DateTime
     val order = Order (
-      10,
-      1000,
-      101,
-      "pending",
-      now)
+      petId = 10,
+      id = 1000,
+      quantity = 101,
+      status = "pending",
+      shipDate = now,
+      complete = true)
 
     api.placeOrder(order)
 
@@ -46,20 +46,21 @@ class StoreApiTest extends FlatSpec with ShouldMatchers {
         order.id should be(1000)
         order.petId should be(10)
         order.quantity should be(101)
-        order.shipDate should be (now)
+        order.shipDate.equals(now) should be (true)
       }
       case None =>
     }
   }
 
   it should "delete an order" in {
-    val now = new java.util.Date
+    val now = new org.joda.time.DateTime
     val order = Order(
-      1001,
-      10,
-      101,
-      "pending",
-      now)
+      id = 1001,
+      petId = 10,
+      quantity = 101,
+      status = "pending",
+      shipDate = now,
+      complete = true)
 
     api.placeOrder(order)
 
@@ -68,7 +69,7 @@ class StoreApiTest extends FlatSpec with ShouldMatchers {
         order.id should be(1001)
         order.petId should be(10)
         order.quantity should be(101)
-        order.shipDate should be (now)
+        order.shipDate.equals(now) should be (true)
       }
       case None =>
     }

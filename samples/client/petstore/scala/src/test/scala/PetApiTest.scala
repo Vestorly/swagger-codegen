@@ -1,17 +1,17 @@
-import com.wordnik.petstore.api._
-import com.wordnik.petstore.model._
+import io.swagger.client._
+import io.swagger.client.api._
+import io.swagger.client.model._
 
 import org.junit.runner.RunWith
 import org.scalatest.junit.JUnitRunner
-import org.scalatest.FlatSpec
-import org.scalatest.matchers.ShouldMatchers
+import org.scalatest._
 
 import scala.collection.mutable.{ ListBuffer, HashMap }
 import scala.collection.JavaConverters._
 import scala.beans.BeanProperty
 
 @RunWith(classOf[JUnitRunner])
-class PetApiTest extends FlatSpec with ShouldMatchers {
+class PetApiTest extends FlatSpec with Matchers {
   behavior of "PetApi"
   val api = new PetApi
 
@@ -31,7 +31,7 @@ class PetApiTest extends FlatSpec with ShouldMatchers {
       Category(1, "sold"),
       "dragon",
       (for (i <- (1 to 10)) yield "http://foo.com/photo/" + i).toList,
-      (for (i <- (1 to 5)) yield Tag(i, "tag-" + i)).toList,
+      (for (i <- (1 to 5)) yield io.swagger.client.model.Tag(i, "tag-" + i)).toList,
       "lost"
     )
 
@@ -56,7 +56,7 @@ class PetApiTest extends FlatSpec with ShouldMatchers {
       Category(1, "sold"),
       "programmer",
       (for (i <- (1 to 10)) yield "http://foo.com/photo/" + i).toList,
-      (for (i <- (1 to 5)) yield Tag(i, "tag-" + i)).toList,
+      (for (i <- (1 to 5)) yield io.swagger.client.model.Tag(i, "tag-" + i)).toList,
       "confused"
     )
 
@@ -81,7 +81,7 @@ class PetApiTest extends FlatSpec with ShouldMatchers {
   }
 
   it should "find pets by status" in {
-    api.findPetsByStatus("available") match {
+    api.findPetsByStatus(List("available")) match {
       case Some(pets) => {
         pets.foreach(pet => pet.status should be("available"))
       }
@@ -91,7 +91,7 @@ class PetApiTest extends FlatSpec with ShouldMatchers {
 
   it should "find pets by tag" in {
     println("finding by tags")
-    api.findPetsByTags("tag1,tag2") match {
+    api.findPetsByTags(List("tag1", "tag2")) match {
       case Some(pets) => {
         pets.foreach(pet => {
           val tags = (for (tag <- pet.tags) yield tag.name).toSet

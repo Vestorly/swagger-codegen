@@ -1,5 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "SWGUser.h"
+#import "SWGObject.h"
 
 
 @interface SWGUserApi: NSObject
@@ -16,10 +17,15 @@
 
  @param body Created user object
  
- */
--(NSNumber*) createUserWithCompletionBlock : (SWGUser*) body
 
+ return type: 
+ */
+-(NSNumber*) createUserWithCompletionBlock :(SWGUser*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Creates list of users with given input array
@@ -27,10 +33,15 @@
 
  @param body List of user object
  
- */
--(NSNumber*) createUsersWithArrayInputWithCompletionBlock : (NSArray*) body
 
+ return type: 
+ */
+-(NSNumber*) createUsersWithArrayInputWithCompletionBlock :(NSArray<SWGUser>*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Creates list of users with given input array
@@ -38,10 +49,15 @@
 
  @param body List of user object
  
- */
--(NSNumber*) createUsersWithListInputWithCompletionBlock : (NSArray*) body
 
+ return type: 
+ */
+-(NSNumber*) createUsersWithListInputWithCompletionBlock :(NSArray<SWGUser>*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Logs user into the system
@@ -50,10 +66,15 @@
  @param username The user name for login
  @param password The password for login in clear text
  
+
+ return type: NSString*
  */
--(NSNumber*) loginUserWithCompletionBlock : (NSString*) username
-            password: (NSString*) password
+-(NSNumber*) loginUserWithCompletionBlock :(NSString*) username 
+     password:(NSString*) password 
+    
     completionHandler: (void (^)(NSString* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -61,10 +82,14 @@
  
 
  
+
+ return type: 
  */
 -(NSNumber*) logoutUserWithCompletionBlock :
+    
+    (void (^)(NSError* error))completionBlock;
 
-(void (^)(NSError* error))completionBlock;
+
 /**
 
  Get user by user name
@@ -72,9 +97,14 @@
 
  @param username The name that needs to be fetched. Use user1 for testing. 
  
+
+ return type: SWGUser*
  */
--(NSNumber*) getUserByNameWithCompletionBlock : (NSString*) username
+-(NSNumber*) getUserByNameWithCompletionBlock :(NSString*) username 
+    
     completionHandler: (void (^)(SWGUser* output, NSError* error))completionBlock;
+    
+
 
 /**
 
@@ -84,11 +114,16 @@
  @param username name that need to be deleted
  @param body Updated user object
  
- */
--(NSNumber*) updateUserWithCompletionBlock : (NSString*) username
-            body: (SWGUser*) body
 
+ return type: 
+ */
+-(NSNumber*) updateUserWithCompletionBlock :(NSString*) username 
+     body:(SWGUser*) body 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
 /**
 
  Delete user
@@ -96,8 +131,14 @@
 
  @param username The name that needs to be deleted
  
- */
--(NSNumber*) deleteUserWithCompletionBlock : (NSString*) username
 
+ return type: 
+ */
+-(NSNumber*) deleteUserWithCompletionBlock :(NSString*) username 
+    
+    
     completionHandler: (void (^)(NSError* error))completionBlock;
+
+
+
 @end
