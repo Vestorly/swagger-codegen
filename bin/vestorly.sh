@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #
 # This script will build all the clients. To execute it, run bin/vestory from the base directory
