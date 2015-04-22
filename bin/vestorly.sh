@@ -5,7 +5,7 @@
 #
 
 declare -a arr=('ruby' 'android'  'java'  'jaxrs' 'nodejs' 'objc' 'scalatra' 'scala' 'dynamic-html' 'html' 'swagger' 'tizen' 'php'  'python', 'csharp')
-declare -a arr=('python')
+declare -a arr=('php')
 
 # for i in "${arr[@]}"
 # do
