@@ -34,6 +34,7 @@ object ScalaJsonUtil {
     mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
     mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false)
     mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY)
+    mapper.configure(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY, true);
     mapper
   }
 }
@@ -141,7 +142,7 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
       }
       case _ => null
     }
-    response.getClientResponseStatus().getStatusCode() match {
+    response.getStatusInfo().getStatusCode() match {
       case 204 => ""
       case code: Int if (Range(200, 299).contains(code)) => {
         response.hasEntity() match {
@@ -155,7 +156,7 @@ class ApiInvoker(val mapper: ObjectMapper = ScalaJsonUtil.getJsonMapper,
           case false => "no data"
         }
         throw new ApiException(
-          response.getClientResponseStatus().getStatusCode(),
+          response.getStatusInfo().getStatusCode(),
           entity)
       }
     }
