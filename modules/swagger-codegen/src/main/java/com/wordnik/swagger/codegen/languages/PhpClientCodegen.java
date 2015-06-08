@@ -28,7 +28,7 @@ public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
   public PhpClientCodegen() {
     super();
 
-    invokerPackage = camelize("SwaggerClient"); 
+    invokerPackage = camelize("vestorlyClient"); 
 
     String packagePath = invokerPackage + "-php";
 
