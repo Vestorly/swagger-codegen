@@ -7,9 +7,9 @@ import java.util.*;
 import java.io.File;
 
 public class JavaClientCodegen extends DefaultCodegen implements CodegenConfig {
-  protected String invokerPackage = "io.swagger.client";
-  protected String groupId = "io.swagger";
-  protected String artifactId = "swagger-java-client";
+  protected String invokerPackage = "vestorly.client";
+  protected String groupId = "vestorly";
+  protected String artifactId = "vestorly";
   protected String artifactVersion = "1.0.0";
   protected String sourceFolder = "src/main/java";
 
