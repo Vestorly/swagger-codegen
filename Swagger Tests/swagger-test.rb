@@ -1,11 +1,11 @@
-require 'swagger_client'
+require 'vestorly'
 require 'pp'
 
 puts "\nStart of tests\n"
-api = SwaggerClient::SessionsApi
+api = Vestorly::SessionsApi
 
 # POST
-response = api.login("jpwisz@gmail.com", "12desbrosses")
+response = api.login("EMAIL", "PASSWORD")
 auth = response.vestorly_auth
 current_id = response.current_user._id
 pp response
@@ -15,7 +15,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of AdvisorsApi tests\n"
-api = SwaggerClient::AdvisorsApi
+api = Vestorly::AdvisorsApi
 
 # GET{id}
 response = api.find_advisor_by_id(auth, current_id)
@@ -27,7 +27,7 @@ puts "#" * 50
 ##########################################################################
 
 puts "\nStart of PostsApi tests\n"
-api = SwaggerClient::PostsApi
+api = Vestorly::PostsApi
 
 # GET
 response = api.find_posts(auth)
@@ -40,7 +40,7 @@ for post in response.posts do
 end
 
 # POST
-postInput = SwaggerClient::Post.new
+postInput = Vestorly::Post.new
 postInput.title = "MY TITLE"
 postInput.post_date = "MY POST DATE"
 response = api.create_post(auth, postInput)
@@ -49,7 +49,7 @@ myID = response.post._id
 pp response
 
 # PUT
-postUpdate = SwaggerClient::Post.new
+postUpdate = Vestorly::Post.new
 postUpdate.title = "MY UPDATED TITLE"
 postUpdate.post_date = "MY UPDATE POST DATE"
 response = api.update_post_by_id(auth, myID, postUpdate)
@@ -61,7 +61,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of ArticlesApi tests\n"
-api = SwaggerClient::ArticlesApi
+api = Vestorly::ArticlesApi
 
 # GET
 response = api.find_articles(auth)
@@ -79,7 +79,7 @@ puts "#" * 50
 ##########################################################################
 
 puts "\nStart of SourcesApi tests\n"
-api = SwaggerClient::SourcesApi
+api = Vestorly::SourcesApi
 
 # GET
 response = api.find_sources(auth)
@@ -92,7 +92,7 @@ for source in response.sources do
 end
 
 # POST
-sourceInput = SwaggerClient::SourceInput.new
+sourceInput = Vestorly::SourceInput.new
 sourceInput.name = "MY NAME" + Time.now.to_s
 sourceInput.rss_publisher = "MY RSS PUBLISHER" + Time.now.to_s
 sourceInput.url = "MY URL" + Time.now.to_s
@@ -103,7 +103,7 @@ myID = response.source._id
 pp response
 
 # PUT
-sourceUpdate = SwaggerClient::SourceInput.new
+sourceUpdate = Vestorly::SourceInput.new
 sourceUpdate.name = "MY UPDATED NAME" + Time.now.to_s
 sourceUpdate.rss_publisher = "MY UPDATE RSS PUBLISHER" + Time.now.to_s
 sourceUpdate.url = "MY UPDATED URL" + Time.now.to_s
@@ -117,7 +117,7 @@ puts "#" * 50
 ##########################################################################
 
 puts "\nStart of NewslettersApi tests\n"
-api = SwaggerClient::NewslettersApi
+api = Vestorly::NewslettersApi
 
 # GET
 response = api.find_newsletters(auth)
@@ -130,10 +130,10 @@ for newsletter in response.newsletters do
 end
 
 # PUT
-newsletterUpdate = SwaggerClient::NewsletterInput.new
+newsletterUpdate = Vestorly::NewsletterInput.new
 newsletterUpdate.click_count = 14
 
-response = api.update_newsletter_by_id(auth, "5566a0de6ca03f7e720000e8", newsletterUpdate)
+response = api.update_newsletter_by_id(auth, "ID", newsletterUpdate)
 
 pp response
 
@@ -142,7 +142,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of NewsletterSettingsApi tests\n"
-api = SwaggerClient::NewslettersettingsApi
+api = Vestorly::NewslettersettingsApi
 
 # GET
 response = api.find_newsletter_settings(auth)
@@ -155,10 +155,10 @@ for newslettersetting in response.newsletter_settings do
 end
 
 # PUT
-newsletterSettingsUpdate = SwaggerClient::NewsletterSettingsInput.new
-newsletterSettingsUpdate.newsletter_setting = api.find_newsletter_settings_by_id("5500b9616127785fd800000a", auth).newsletter_setting
+newsletterSettingsUpdate = Vestorly::NewsletterSettingsInput.new
+newsletterSettingsUpdate.newsletter_setting = api.find_newsletter_settings_by_id("ID", auth).newsletter_setting
 
-response = api.update_newsletter_settings_by_id("5500b9616127785fd800000a", auth, newsletterSettingsUpdate)
+response = api.update_newsletter_settings_by_id("ID", auth, newsletterSettingsUpdate)
 
 pp response
 
@@ -167,7 +167,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of EventsApi tests\n"
-api = SwaggerClient::EventsApi
+api = Vestorly::EventsApi
 
 # GET
 response = api.find_events(auth)
@@ -180,7 +180,7 @@ for event in response.events do
 end
 
 # POST
-eventInput = SwaggerClient::EventInput.new
+eventInput = Vestorly::EventInput.new
 response = api.create_event(auth, eventInput)
 pp response
 
@@ -189,7 +189,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of GroupsApi tests\n"
-api = SwaggerClient::GroupsApi
+api = Vestorly::GroupsApi
 
 # GET
 response = api.find_groups(auth)
@@ -202,8 +202,8 @@ for group in response.groups do
 end
 
 # POST
-groupInput = SwaggerClient::GroupInput.new
-groupInput.name = "MY NAMEasdfdfasd"
+groupInput = Vestorly::GroupInput.new
+groupInput.name = "MY NAMEasdfdasdfasdf"
 
 response = api.create_group(auth, groupInput)
 myID = response.group._id
@@ -211,8 +211,8 @@ myID = response.group._id
 pp response
 
 # PUT
-groupUpdate = SwaggerClient::GroupInput.new
-groupUpdate.name = "MY UPDATED NAME"
+groupUpdate = Vestorly::GroupInput.new
+groupUpdate.name = "MY UPDATED NAMEadsfasdfa"
 groupUpdate._id = myID
 response = api.update_group_by_id(auth, myID, groupUpdate)
 
@@ -228,7 +228,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of MembersApi tests\n"
-api = SwaggerClient::MembersApi
+api = Vestorly::MembersApi
 
 # GET
 response = api.find_members(auth)
@@ -241,7 +241,7 @@ for member in response.members do
 end
 
 # POST
-memberInput = SwaggerClient::Member.new
+memberInput = Vestorly::Member.new
 memberInput.email = "MY EMAIL" + Time.now.to_s
 memberInput.first_name = "MY FIRST NAME" + Time.now.to_s
 memberInput.last_name = "MY LAST NAME" + Time.now.to_s
@@ -264,7 +264,7 @@ puts "#" * 50
 
 ##########################################################################
 puts "\nStart of MemberEventsApi tests\n"
-api = SwaggerClient::MembereventsApi
+api = Vestorly::MembereventsApi
 
 # GET
 response = api.find_member_events(auth)
@@ -274,7 +274,7 @@ puts "\nAll MemberEventsApi tests have passed!\n"
 puts "#" * 50
 ##########################################################################
 puts "\nStart of MemberReportsApi tests\n"
-api = SwaggerClient::MemberreportsApi
+api = Vestorly::MemberreportsApi
 
 # GET
 response = api.find_member_reports(auth)
@@ -283,7 +283,7 @@ pp response
 puts "\nAll MemberReportsApi tests have passed!\n"
 puts "#" * 50
 ##########################################################################
-api = SwaggerClient::SessionsApi
+api = Vestorly::SessionsApi
 
 # DELETE
 response = api.logout(vestorly_auth=auth, id=current_id)

@@ -10,6 +10,6 @@ for i in "${arr[@]}"
 do
     java -jar modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate  \
          -i http://127.0.0.1:3000/apidocs  \
-         -l $i   -o ~/Clients/v2/$i
+         -l $i   -o ~/Repositories/Clients/v2/$i
 
 done

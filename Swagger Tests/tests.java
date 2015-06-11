@@ -1,15 +1,14 @@
 
-import io.swagger.client.*;
-import io.swagger.client.api.*;
-import io.swagger.client.model.*;
-import io.swagger.client.model.EventInput.TypeEnum;
+import vestorly.client.*;
+import vestorly.client.api.*;
+import vestorly.client.model.*;
+import vestorly.client.model.EventInput.TypeEnum;
 
 public class tests {
 
 	public static void main(String[] args) throws ApiException {
-		String username = "jpwisz@gmail.com";
-		String password = "12desbrosses";
-		String username2 = "greg@vestorly.com";
+		String username = "EMAIL";
+		String password = "PASSWORD";
 		
 		// Login (/sessions/POST)
 		SessionsApi sessionsApi = new SessionsApi();
@@ -151,7 +150,7 @@ public class tests {
 		myNLINPUT.setClickCount((long) 5);
 		// AN ERROR MIGHT OCCUR HERE CONSIDERING THIS ID IS HARDCODED;
 		// IF THAT HAPPENS, COPY PASTE A DIFFERENT ID FROM THE PRINTED ONES IN THE ABOVE TEST
-		System.out.println("PUT: " + newslettersApi.updateNewsletterByID(auth, "5566a0de6ca03f7e720000e8", myNLINPUT));
+		System.out.println("PUT: " + newslettersApi.updateNewsletterByID(auth, "ID", myNLINPUT));
 		System.out.println("\n\nEND OF NEWSLETTERSAPI TEST\n\n");
 		
 	}
@@ -174,10 +173,10 @@ public class tests {
 		
 		// PUT
 		NewsletterSettingsInput myInput = new NewsletterSettingsInput();
-		myInput.setNewsletterSetting(newslettersettingsApi.findNewsletterSettingsByID("55706f43e211075b2b00000e", auth).getNewsletterSetting());
-		//myInput.getNewsletterSetting().setId("532b686ffab10e0002000005");
+		myInput.setNewsletterSetting(newslettersettingsApi.findNewsletterSettingsByID("ID", auth).getNewsletterSetting());
+		//myInput.getNewsletterSetting().setId("ID");
 		//System.out.println(myInput);
-		Newslettersettingresponse updatedNLSettings = newslettersettingsApi.updateNewsletterSettingsByID("55706f43e211075b2b00000e", auth, myInput);
+		Newslettersettingresponse updatedNLSettings = newslettersettingsApi.updateNewsletterSettingsByID("ID", auth, myInput);
 		System.out.println("PUT: " + updatedNLSettings);
 		System.out.println("\n\nEND OF NEWSLETTERSETTINGSAPI TEST\n\n");
 	}

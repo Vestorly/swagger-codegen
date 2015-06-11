@@ -1,15 +1,15 @@
-import SwaggerPetstore
+import vestorly
 import time
 
-client = SwaggerPetstore.ApiClient(host="http://dev.vestorly.com/api/v2", header_name='x-SwaggerPetstore-auth', header_value="")
+client = vestorly.ApiClient(host="http://dev.vestorly.com/api/v2", header_name='x-vestorly-auth', header_value="")
 
 
 ################################ SessionsApi Tests ################################ 
 print "\nSessionsApi Tests\n"
-api = SwaggerPetstore.SessionsApi()
+api = vestorly.SessionsApi(api_client=client)
 
 # /sessions POST
-response =  api.login(**{'username':"jpwisz@gmail.com", 'password':"12desbrosses"})
+response =  api.login(**{'username':"EMAIL", 'password':"PASSWORD"})
 auth = response.vestorly_auth
 print "AUTH: " + auth + "\n"
 
@@ -20,7 +20,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ################################## AdvisorsApi Tests ################################ 
 print "\n" + "AdvisorsApi Tests"
-api = SwaggerPetstore.AdvisorsApi(api_client=client)
+api = vestorly.AdvisorsApi(api_client=client)
 
 # /advisors GET
 response = api.find_advisor_by_id(vestorly_auth=auth, id=response.current_user._id)
@@ -33,7 +33,7 @@ print "\n" + ("#" * 50)
 
 ################################ PostsApi Tests ################################ 
 print "\nPostsApi Tests\n"
-api = SwaggerPetstore.PostsApi(api_client=client)
+api = vestorly.PostsApi(api_client=client)
 
 ########## /posts GET
 response = api.find_posts(vestorly_auth=auth)
@@ -47,7 +47,7 @@ for post in response.posts:
         print item
 
 ########## /posts/ POST
-postInput = SwaggerPetstore.PostInput()
+postInput = vestorly.PostInput()
 postInput.title = "MY TITLE"
 postInput.post_date = "MY POSTDATE"
 response = api.create_post(vestorly_auth=auth, post=postInput)
@@ -57,7 +57,7 @@ for item in attrs.items():
     print item
 
 ######## /posts/{id} PUT
-postUpdate = SwaggerPetstore.Post()
+postUpdate = vestorly.Post()
 postUpdate.title = "MY UPDATED TITLE"
 postUpdate.post_date = "MY UPDATED POSTDATE"
 response = api.update_post_by_id(vestorly_auth=auth, id=myID, post=postUpdate)
@@ -72,7 +72,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ################################ ArticlesApi Tests ################################ 
 print "\n" + "ArticlesApi Tests "
-api = SwaggerPetstore.ArticlesApi(api_client=client)
+api = vestorly.ArticlesApi(api_client=client)
 
 ########## /articles GET
 response = api.find_articles(vestorly_auth=auth, limit = 10)
@@ -90,7 +90,7 @@ print "\n" + ("#" * 50)
 
 ############################## SourcesApi Tests ################################
 print "\nSourcesApi Tests\n"
-api = SwaggerPetstore.SourcesApi(api_client=client)
+api = vestorly.SourcesApi(api_client=client)
 
 ########## /sources GET
 response = api.find_sources(vestorly_auth=auth)
@@ -104,7 +104,7 @@ for source in response.sources:
         print item
 
 ########## /sources/ POST
-sourceInput = SwaggerPetstore.SourceInput()
+sourceInput = vestorly.SourceInput()
 sourceInput.name = "MY NAME" + str(time.time())
 sourceInput.rss_publisher = "MY RSS PUBLISHER" + str(time.time())
 sourceInput.url = "MY URL" + str(time.time())
@@ -117,7 +117,7 @@ for item in attrs.items():
 print "\n"
 
 ########## /sources/{id} PUT
-sourceUpdate = SwaggerPetstore.SourceInput()
+sourceUpdate = vestorly.SourceInput()
 sourceUpdate.name = "MY UPDATED NAME"
 sourceUpdate.rss_publisher = "MY UPDATED RSS PUBLISHER"
 sourceUpdate.url = "MY UPDATED URL"
@@ -131,7 +131,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## NewlettersApi Tests ################################
 print "\nNewslettersApi Tests\n"
-api = SwaggerPetstore.NewslettersApi(api_client=client)
+api = vestorly.NewslettersApi(api_client=client)
 
 ########## /newsletters GET
 response = api.find_newsletters(vestorly_auth=auth)
@@ -145,10 +145,10 @@ for newsletter in response.newsletters:
         print item
 
 ########## /newsletters/{id} PUT
-newsletterUpdate = SwaggerPetstore.NewsletterInput()
+newsletterUpdate = vestorly.NewsletterInput()
 newsletterUpdate.click_count = 4
 
-response = api.update_newsletter_by_id(vestorly_auth=auth, id="55673d3ca54c92903b0003c5", newsletter=newsletterUpdate)
+response = api.update_newsletter_by_id(vestorly_auth=auth, id="ID", newsletter=newsletterUpdate)
 attrs = vars(response.newsletter)
 print "\n"
 for item in attrs.items():
@@ -159,7 +159,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## NewletterSettingsApi Tests ################################
 print "\nNewsletterSettingsApi Tests\n"
-api = SwaggerPetstore.NewslettersettingsApi(api_client=client)
+api = vestorly.NewslettersettingsApi(api_client=client)
 
 ########## /newsletterSettings GET
 response = api.find_newsletter_settings(vestorly_auth=auth)
@@ -173,8 +173,8 @@ for newslettersetting in response.newsletter_settings:
         print item
 
 ########## /newsletterSettings/{id} PUT
-newsletterSettingsUpdate = SwaggerPetstore.NewsletterSettingsInput()
-newsletterSettingsUpdate.newsletter_setting = api.find_newsletter_settings_by_id(vestorly_auth=auth, id="55706c01e76b99094900004f").newsletter_setting
+newsletterSettingsUpdate = vestorly.NewsletterSettingsInput()
+newsletterSettingsUpdate.newsletter_setting = api.find_newsletter_settings_by_id(vestorly_auth=auth, id="ID").newsletter_setting
 ##newsletterSettingsUpdate.newsletter_setting.email_day_of_week = 1
 ##newsletterSettingsUpdate.newsletter_setting.email_hour = 10
 ##newsletterSettingsUpdate.newsletter_setting.email_status = "off"
@@ -190,7 +190,7 @@ newsletterSettingsUpdate.newsletter_setting = api.find_newsletter_settings_by_id
 ##newsletterSettingsUpdate.newsletter_setting.twitter_status = "off"
 ##newsletterSettingsUpdate.newsletter_setting.newsletter_type = "manual"
 
-response = api.update_newsletter_settings_by_id(vestorly_auth=auth, id="55706c01e76b99094900004f", newsletter_setting=newsletterSettingsUpdate)
+response = api.update_newsletter_settings_by_id(vestorly_auth=auth, id="ID", newsletter_setting=newsletterSettingsUpdate)
 attrs = vars(response.newsletter_setting)
 for item in attrs.items():
     print item
@@ -200,7 +200,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## EventsApi Tests ################################
 print "\nEventsApi Tests\n"
-api = SwaggerPetstore.EventsApi(api_client=client)
+api = vestorly.EventsApi(api_client=client)
 
 ########## /events GET
 response = api.find_events(vestorly_auth=auth)
@@ -214,7 +214,7 @@ for event in response.events:
         print item
 
 ########## /events/ POST
-eventInput = SwaggerPetstore.EventInput()
+eventInput = vestorly.EventInput()
 response = api.create_event(vestorly_auth=auth, event=eventInput)
 print response
 
@@ -223,7 +223,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ################################ GroupsApi Tests ################################ 
 print "\nGroupsApi Tests\n"
-api = SwaggerPetstore.GroupsApi(api_client=client)
+api = vestorly.GroupsApi(api_client=client)
 
 ########## /groups GET
 response = api.find_groups(vestorly_auth=auth)
@@ -237,8 +237,8 @@ for group in response.groups:
         print item
 
 ########## /groups/ POST
-groupInput = SwaggerPetstore.GroupInput()
-groupInput.name = "MY NAME"
+groupInput = vestorly.GroupInput()
+groupInput.name = "MY NAMEytasdfhdf"
 
 response = api.create_group(vestorly_auth=auth, group=groupInput)
 myID = response.group._id
@@ -249,8 +249,8 @@ for item in attrs.items():
     
 
 ########## /groups/{id} PUT
-groupUpdate = SwaggerPetstore.GroupInput()
-groupUpdate.name = "MY UPDATED NAME"
+groupUpdate = vestorly.GroupInput()
+groupUpdate.name = "MY UPDATED NAMEadfgsdf"
 groupUpdate._id = myID
 response = api.update_group_by_id(vestorly_auth=auth, id=myID, group=groupUpdate)
 attrs = vars(response.group)
@@ -270,7 +270,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## MembersApi Tests ################################ 
 print "\nMembersApi Tests\n"
-api = SwaggerPetstore.MembersApi(api_client=client)
+api = vestorly.MembersApi(api_client=client)
 
 ########## /members GET
 response = api.find_members(vestorly_auth=auth)
@@ -284,10 +284,10 @@ for member in response.members:
         print item
 
 ########## /members/ POST
-memberInput = SwaggerPetstore.Member()
-memberInput.email = "fahim.afadl@gmail.com"
-memberInput.first_name = "Fahim"
-memberInput.last_name = "Abouelfadl"
+memberInput = vestorly.Member()
+memberInput.email = "gmail@gmail.com"
+memberInput.first_name = "Gmail"
+memberInput.last_name = "Last"
 ##attrs = vars(memberInput)
 ##for item in attrs.items():
 ##    print item
@@ -308,7 +308,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## MemberEventsApi Tests ################################ 
 print "\nMemberEventsApi Tests\n"
-api = SwaggerPetstore.MembereventsApi(api_client=client)
+api = vestorly.MembereventsApi(api_client=client)
 
 ########## /memberevents GET
 response = api.find_member_events(vestorly_auth=auth)
@@ -323,7 +323,7 @@ print "\n" + ("#" * 50) + "\n"
 
 ############################## MemberReportsApi Tests ################################ 
 print "\nMemberReports Tests\n"
-api = SwaggerPetstore.MemberreportsApi(api_client=client)
+api = vestorly.MemberreportsApi(api_client=client)
 
 ########## /memberreports GET
 response = api.find_member_reports(vestorly_auth=auth)
