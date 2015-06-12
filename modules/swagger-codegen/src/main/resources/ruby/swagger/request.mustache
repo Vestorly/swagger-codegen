@@ -129,7 +129,7 @@ module {{moduleName}}
           next if self.path.include? "{#{key}}"                                   # skip path params
           next if value.blank? && value.class != FalseClass                       # skip empties
           if Swagger.configuration.camelize_params
-            key = key.to_s.camelize(:lower).to_sym unless key.to_sym == :api_key    # api_key is not a camelCased param
+            key = key.to_s.camelize(:lower).to_sym unless (key.to_sym == :api_key || key.to_sym == :vestorly_auth)   # api_key is not a camelCased param
           end
           query_values[key] = value.to_s
         end

@@ -8,9 +8,9 @@ import java.util.*;
 import java.io.File;
 
 public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
-  protected String invokerPackage = "com.wordnik.client";
-  protected String groupId = "com.wordnik";
-  protected String artifactId = "swagger-client";
+  protected String invokerPackage = "vestorly.client";
+  protected String groupId = "vestorly";
+  protected String artifactId = "vestorly";
   protected String artifactVersion = "1.0.0";
 
   public CodegenType getTag() {
@@ -28,7 +28,7 @@ public class PhpClientCodegen extends DefaultCodegen implements CodegenConfig {
   public PhpClientCodegen() {
     super();
 
-    invokerPackage = camelize("SwaggerClient"); 
+    invokerPackage = camelize("vestorlyClient"); 
 
     String packagePath = invokerPackage + "-php";
 

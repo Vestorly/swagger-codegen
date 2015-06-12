@@ -8,7 +8,7 @@ import java.util.*;
 import java.io.File;
 
 public class RubyClientCodegen extends DefaultCodegen implements CodegenConfig {
-  protected String gemName = "swagger_client";
+  protected String gemName = "vestorly";
   protected String moduleName = null;
   protected String libFolder = "lib";
 

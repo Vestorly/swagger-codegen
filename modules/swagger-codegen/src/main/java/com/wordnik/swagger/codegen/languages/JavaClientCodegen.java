@@ -7,9 +7,9 @@ import java.util.*;
 import java.io.File;
 
 public class JavaClientCodegen extends DefaultCodegen implements CodegenConfig {
-  protected String invokerPackage = "io.swagger.client";
-  protected String groupId = "io.swagger";
-  protected String artifactId = "swagger-java-client";
+  protected String invokerPackage = "vestorly.client";
+  protected String groupId = "vestorly";
+  protected String artifactId = "vestorly";
   protected String artifactVersion = "1.0.0";
   protected String sourceFolder = "src/main/java";
 
@@ -31,8 +31,8 @@ public class JavaClientCodegen extends DefaultCodegen implements CodegenConfig {
     modelTemplateFiles.put("model.mustache", ".java");
     apiTemplateFiles.put("api.mustache", ".java");
     templateDir = "Java";
-    apiPackage = "io.swagger.client.api";
-    modelPackage = "io.swagger.client.model";
+    apiPackage = "vestorly.client.api";
+    modelPackage = "vestorly.client.model";
 
     reservedWords = new HashSet<String> (
       Arrays.asList(

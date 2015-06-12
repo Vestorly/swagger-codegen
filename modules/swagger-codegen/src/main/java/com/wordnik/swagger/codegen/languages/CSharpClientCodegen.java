@@ -7,9 +7,9 @@ import java.util.*;
 import java.io.File;
 
 public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig {
-  protected String invokerPackage = "IO.Swagger.Client";
-  protected String groupId = "io.swagger";
-  protected String artifactId = "swagger-csharp-client";
+  protected String invokerPackage = "vestorly.client";
+  protected String groupId = "vestorly";
+  protected String artifactId = "vestorly-csharp-client";
   protected String artifactVersion = "1.0.0";
   protected String sourceFolder = "src/main/csharp";
 
@@ -31,8 +31,8 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
     modelTemplateFiles.put("model.mustache", ".cs");
     apiTemplateFiles.put("api.mustache", ".cs");
     templateDir = "csharp";
-    apiPackage = "IO.Swagger.Api";
-    modelPackage = "IO.Swagger.Model";
+    apiPackage = "vestorly.Api";
+    modelPackage = "vestorly.Model";
 
     reservedWords = new HashSet<String> (
       Arrays.asList(
