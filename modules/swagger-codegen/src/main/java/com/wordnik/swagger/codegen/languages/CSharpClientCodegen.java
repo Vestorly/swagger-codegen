@@ -31,8 +31,8 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
     modelTemplateFiles.put("model.mustache", ".cs");
     apiTemplateFiles.put("api.mustache", ".cs");
     templateDir = "csharp";
-    apiPackage = "vestorly.Api";
-    modelPackage = "vestorly.Model";
+    apiPackage = "vestorly.api";
+    modelPackage = "vestorly.model";
 
     reservedWords = new HashSet<String> (
       Arrays.asList(
@@ -46,6 +46,7 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
     supportingFiles.add(new SupportingFile("apiException.mustache", 
       (sourceFolder + File.separator + invokerPackage).replace(".", java.io.File.separator), "ApiException.cs"));
     supportingFiles.add(new SupportingFile("Newtonsoft.Json.dll", "bin", "Newtonsoft.Json.dll"));
+    supportingFiles.add(new SupportingFile("RestSharp.dll", "bin", "RestSharp.dll"));
     supportingFiles.add(new SupportingFile("compile.mustache", "", "compile.bat"));
 
     languageSpecificPrimitives = new HashSet<String>(
@@ -113,6 +114,7 @@ public class CSharpClientCodegen extends DefaultCodegen implements CodegenConfig
     // camelize the variable name
     // pet_id => PetId
     name = camelize(name);
+    name = name.substring(0,1).toLowerCase() + name.substring(1);
 
     // for reserved word or word starting with number, append _
     if(reservedWords.contains(name) || name.matches("^\\d.*"))

@@ -45,7 +45,16 @@ namespace {{package}} {
     /// <returns>{{#returnType}}{{{returnType}}}{{/returnType}}</returns>
     public {{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}} {{nickname}} ({{#allParams}}{{{dataType}}} {{paramName}}{{#hasMore}}, {{/hasMore}}{{/allParams}}) {
 
-      var _request = new RestRequest("{{path}}", Method.{{httpMethod}});
+      String myPath = "{{path}}";
+
+      {{#queryParams}} if ("{{paramName}}" == "vestorlyAuth") {
+        if (("{{httpMethod}}" == "POST" || "{{httpMethod}}" == "PUT") && "{{classname}}" != "SessionsApi") {
+          myPath += "?vestorly_auth=" + {{paramName}};
+        }
+      }{{/queryParams}}
+      
+      var _request = new RestRequest(myPath, Method.{{httpMethod}});
+
 
       {{#allParams}}{{#required}}
       // verify the required parameter '{{paramName}}' is set
@@ -61,7 +70,7 @@ namespace {{package}} {
       _request.AddUrlSegment("format", "json"); // set format to json by default
       {{#pathParams}}_request.AddUrlSegment("{{baseName}}", ApiInvoker.ParameterToString({{{paramName}}})); // path (url segment) parameter
       {{/pathParams}}
-      {{#queryParams}} if ({{paramName}} != null) _request.AddParameter("{{baseName}}", ApiInvoker.ParameterToString({{paramName}})); // query parameter
+      {{#queryParams}} if ({{paramName}} != null && ("{{httpMethod}}" == "GET" || "{{httpMethod}}" == "DELETE" || "{{classname}}" == "SessionsApi")) _request.AddParameter("{{baseName}}", ApiInvoker.ParameterToString({{paramName}})); // query parameter
       {{/queryParams}}
       {{#headerParams}} if ({{paramName}} != null) _request.AddHeader("{{baseName}}", ApiInvoker.ParameterToString({{paramName}})); // header parameter
       {{/headerParams}}
